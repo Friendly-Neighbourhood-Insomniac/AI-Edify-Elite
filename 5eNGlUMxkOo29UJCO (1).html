@@ -1,0 +1,198 @@
+<html><head><base href="https://pronounce.ai-edify.luxury/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Edify Elite Pronunciation Assistant</title>
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.36.1/gradio.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary-color: #2c0e4e;
+        --secondary-color: #1a0a2e;
+        --accent-color: #9b59b6;
+        --background-color: #0f0712;
+        --text-color: #f0f0f0;
+    }
+    
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Raleway', sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-x: hidden;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 2rem;
+        box-sizing: border-box;
+    }
+    
+    header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+    
+    h1 {
+        font-family: 'Cinzel', serif;
+        font-size: clamp(2rem, 5vw, 4rem);
+        margin-bottom: 0.5rem;
+        background: linear-gradient(45deg, var(--accent-color), #d6a9e6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .subtitle {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        font-weight: 300;
+        opacity: 0.8;
+    }
+    
+    .gradio-container {
+        position: relative;
+        padding: 2rem;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        background-color: rgba(28, 14, 46, 0.8);
+        backdrop-filter: blur(10px);
+    }
+    
+    .gradient-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        background-size: 400% 400%;
+        animation: gradientBG 20s ease infinite;
+        z-index: -1;
+        opacity: 0.8;
+    }
+    
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        animation: shine 5s infinite;
+    }
+    
+    @keyframes shine {
+        0% { left: -100%; }
+        20% { left: 100%; }
+        100% { left: 100%; }
+    }
+    
+    gradio-app {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    gradio-app::part(block-label) {
+        color: var(--text-color);
+    }
+    
+    gradio-app::part(button-primary) {
+        background-color: var(--accent-color);
+        color: var(--text-color);
+    }
+    
+    gradio-app::part(input) {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--text-color);
+        border: 1px solid var(--accent-color);
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            padding: 1rem;
+        }
+        
+        .gradio-container {
+            padding: 1rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="gradient-background"></div>
+    <div class="container">
+        <header>
+            <h1>AI-Edify Elite</h1>
+            <p class="subtitle">Elevate Your Pronunciation with Luxury Precision</p>
+            <div class="shine"></div>
+        </header>
+        
+        <div class="gradio-container">
+            <gradio-app src="https://ai-edify-pronounciation-assistant.hf.space"></gradio-app>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const gradioApp = document.querySelector('gradio-app');
+            gradioApp.addEventListener('ready', () => {
+                console.log('Gradio app is ready');
+                
+                // Adjust layout for better responsiveness
+                const resizeObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const width = entry.contentRect.width;
+                        if (width < 600) {
+                            gradioApp.style.fontSize = '14px';
+                        } else {
+                            gradioApp.style.fontSize = '16px';
+                        }
+                    }
+                });
+                
+                resizeObserver.observe(gradioApp);
+                
+                // Smooth scroll to component when button is clicked
+                const scrollToComponent = () => {
+                    const component = document.querySelector('.gradio-container');
+                    component.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+                
+                // Add this function to any buttons that should scroll to the component
+                // For example: document.querySelector('#start-button').addEventListener('click', scrollToComponent);
+            });
+        });
+    </script>
+</body>
+</html>
