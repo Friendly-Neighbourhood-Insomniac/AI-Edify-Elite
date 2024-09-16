@@ -1,0 +1,58 @@
+Pronunciation Practice Tool Documentation
+Overview
+This web-based tool was created to help users improve their English pronunciation. It generates text for users to read aloud, records their speech, transcribes it, and then provides feedback on their pronunciation.
+
+Libraries and Technologies
+Gradio: I chose Gradio because it makes building machine learning web interfaces simple. It allowed me to quickly prototype and deploy the application.
+OpenAI: I used GPT-3.5-turbo for text generation and pronunciation feedback, as it offers a good balance between cost and performance, making it more practical than GPT-4 for this use case.
+SpeechRecognition: I implemented Google’s speech recognition service to handle the transcription of user speech. I selected it due to its high accuracy and ease of use.
+Python's Logging Module: I incorporated Python’s logging module to monitor the application and aid with debugging.
+Front-End Customization
+I chose to embed this Gradio app within a simple static site front-end for easier customization and more flexibility. This approach allows me to easily create white-labeled versions of the app for potential clients without altering the core design elements. By embedding the app into a static site, I can seamlessly adjust visual elements or branding to fit specific client requirements. Additionally, this setup allows for custom domain usage, further enhancing the white-labeled experience for clients by strengthening their brand identity through the app’s interface.
+
+Development Challenges and Solutions
+API Key Issues:
+
+Problem: The OpenAI API key wasn’t being recognized at first.
+Solution: I fixed this by ensuring that the environment variables were properly configured within Hugging Face Space settings.
+Text Generation Formatting:
+
+Problem: The generated text sometimes included extra instructions or comments.
+Solution: I refined the prompt to request only simple sentences without unnecessary details.
+Transcription Errors:
+
+Problem: The transcription was failing silently, making it hard to identify where things were going wrong.
+Solution: I added more robust error handling and logging to capture exactly where the transcription process was breaking down.
+Feedback Generation:
+
+Problem: The comparison between the original text and the transcription wasn’t functioning correctly.
+Solution: By implementing detailed logging for each step, I was able to identify the issue and fix the logic for comparing the transcribed text with the original.
+Potential Error Warning
+Potential errors may arise due to connection issues when transcribing audio. If you encounter any issues with transcription or feedback generation, I recommend reloading the page to reset all input fields and retry the process.
+
+Future Enhancements
+User Interface:
+
+Add a "Clear" button to reset all fields.
+Implement progress indicators for longer-running tasks.
+New Features:
+
+Allow users to input custom text for practice.
+Introduce difficulty levels for the text generation.
+Implement a scoring system to track user progress over time.
+Performance:
+
+Implement caching for frequently generated texts to improve speed.
+Explore faster speech-to-text alternatives to provide real-time feedback.
+User Experience:
+
+Introduce user accounts so users can save their practice history.
+Add a feedback system to let users report issues or suggest improvements.
+Mobile Accessibility:
+
+Optimize the interface for mobile devices to make it more accessible.
+Language Support:
+
+Add support for multiple languages to broaden the tool’s reach and appeal to non-English speakers.
+Conclusion
+Developing this project was a valuable experience in working with APIs, speech recognition, and web application development. There is still room for improvement, but this version lays a solid foundation for helping users practice and improve their English pronunciation. Embedding the app within a customizable static site front-end offers the flexibility needed to tailor the tool for specific client needs, enabling white-labeling and custom domain support to enhance brand alignment.
